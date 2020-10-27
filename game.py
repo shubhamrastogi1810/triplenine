@@ -66,6 +66,7 @@ def select_winner(p):
         if len(sequence)==1:
             return next(iter(sequence))
         else:
+            #ToDo: find sum of cards in each sequence
             sequence = {k: v for k, v in sorted(sequence.items(), key=lambda item: item[1])}
             print("More than one sequences")
             return list(sequence)[-1]
@@ -74,6 +75,7 @@ def select_winner(p):
         if len(color)==1:
             return next(iter(color))
         else:
+            #ToDo: find sum of cards in each color
             color = {k: v for k, v in sorted(color.items(), key=lambda item: item[1])}
             print('More than one colors')
             return list(color)[-1]
