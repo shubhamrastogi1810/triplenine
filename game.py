@@ -63,7 +63,6 @@ def select_winner(p):
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
-    print (totsum)
     return list(totsum)[-1]
 
 if __name__ == '__main__':
