@@ -1,39 +1,60 @@
 import random
 
+"""
+A simple card game a la poker.
+
+10 players. 52 cards.
+
+Each player is dealt with 3 cards drawn randomly one-by-one to players in turn.
+
+Cards have weights from 2-14.
+
+select_winner will decide who wins.
+"""
+
 def main():
-    
+    """
+    The main method
+    """
     deck = init_deck()
     play = deal(deck,10)
     winner = select_winner(play)
-    print(winner)
+    print('Winner is {:2d}'.format(winner))
 
 
 def init_deck():
-
-    d = [('S',i) for i in range(2,15)]\
+    """
+    Initialize the deck.
+    """
+    deck = [('S',i) for i in range(2,15)]\
     + [('D',i) for i in range(2,15)]\
     + [('H',i) for i in range(2,15)]\
     + [('C',i) for i in range(2,15)]
 
-    return d
+    return deck
 
-def deal(d,n):
-
-    p = {}
+def deal(deck,num):
+    """
+    Deal the cards.
+    """
+    play = {}
     for i in range(1, 4) :
-        for j in range(1, n+1):
+        for j in range(1, num+1):
 
-            # p is a dict {playernum:[card1, card2, card3]}
-            nextnum = random.randint(0, len(d)-1)
-            nextcard = d[nextnum]
-            del d[nextnum]
-            if j not in p:
-                p[j] = [nextcard]
+            # play is a dict {playernum:[card1, card2, card3]}
+            nextnum = random.randint(0, len(deck)-1)
+            nextcard = deck[nextnum]
+            del deck[nextnum]
+            if j not in play:
+                play[j] = [nextcard]
             else:
-                p[j].append(nextcard)
-    return p
+                play[j].append(nextcard)
+    return play
 
 def findmax(s):
+    """
+    Find maximum of the card set.
+    """
     tot = {}
     for key, val in s.items():
         tot[key] = val[0][1] + val[1][1] + val[2][1]
@@ -41,20 +62,23 @@ def findmax(s):
     tot = {k: v for k, v in sorted(tot.items(), key=lambda item: item[1])}
 
     return list(tot)[-1]
-    
 
-def select_winner(p):
+
+def select_winner(play):
+    """
+    Select the winner.
+    """
     totsum = {}
     color = {}
     sequence = {}
     triple = {}
 
-    for k,v in p.items():
+    for k,v in play.items():
         v.sort(key = lambda x:x[1]) # sort cards so its easy to find sequence
-        print (k, v)
+        print('{:2d} {}'.format(k, v))
 
         totsum[k] = v[0][1]+v[1][1]+v[2][1] # sum total for each player if needed to decide winner
-        
+
         if v[0][0] == v[1][0] == v[2][0]:
             color[k] = v
 
@@ -66,25 +90,13 @@ def select_winner(p):
 
 
     if triple:
-        if len(triple)==1:
-            return next(iter(triple))
-        else:
-            #More than one triples
-            return findmax(triple)
+        return findmax(triple)
 
     if sequence:
-        if len(sequence)==1:
-            return next(iter(sequence))
-        else:
-            #More than one sequences
-            return findmax(sequence)
+        return findmax(sequence)
 
     if color:
-        if len(color)==1:
-            return next(iter(color))
-        else:
-            #More than one colors
-            return findmax(color)
+        return findmax(color)
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
