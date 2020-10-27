@@ -56,10 +56,10 @@ def select_winner(p):
 
     if triple:
         return next(iter(triple))
-    if color:
-        return next(iter(color))
     if sequence:
         return next(iter(sequence))
+    if color:
+        return next(iter(color))
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
