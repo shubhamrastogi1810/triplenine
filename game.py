@@ -55,11 +55,28 @@ def select_winner(p):
 
 
     if triple:
-        return next(iter(triple))
+        if len(triple)==1:
+            return next(iter(triple))
+        else:
+            triple = {k: v for k, v in sorted(triple.items(), key=lambda item: item[1])}
+            print("More than one triples")
+            return list(triple)[-1]
+
     if sequence:
-        return next(iter(sequence))
+        if len(sequence)==1:
+            return next(iter(sequence))
+        else:
+            sequence = {k: v for k, v in sorted(sequence.items(), key=lambda item: item[1])}
+            print("More than one sequences")
+            return list(sequence)[-1]
+
     if color:
-        return next(iter(color))
+        if len(color)==1:
+            return next(iter(color))
+        else:
+            color = {k: v for k, v in sorted(color.items(), key=lambda item: item[1])}
+            print('More than one colors')
+            return list(color)[-1]
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
