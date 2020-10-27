@@ -1,5 +1,3 @@
-import random
-
 """
 A simple card game a la poker.
 
@@ -11,6 +9,7 @@ Cards have weights from 2-14.
 
 select_winner will decide who wins.
 """
+import random
 
 def main():
     """
@@ -51,12 +50,12 @@ def deal(deck,num):
                 play[j].append(nextcard)
     return play
 
-def findmax(s):
+def findmax(cards):
     """
     Find maximum of the card set.
     """
     tot = {}
-    for key, val in s.items():
+    for key, val in cards.items():
         tot[key] = val[0][1] + val[1][1] + val[2][1]
 
     tot = {k: v for k, v in sorted(tot.items(), key=lambda item: item[1])}
@@ -73,20 +72,21 @@ def select_winner(play):
     sequence = {}
     triple = {}
 
-    for k,v in play.items():
-        v.sort(key = lambda x:x[1]) # sort cards so its easy to find sequence
-        print('{:2d} {}'.format(k, v))
+    for k,val in play.items():
+        val.sort(key = lambda x:x[1]) # sort cards so its easy to find sequence
+        print('{:2d} {}'.format(k, val))
 
-        totsum[k] = v[0][1]+v[1][1]+v[2][1] # sum total for each player if needed to decide winner
+        # sum total for each player if needed to decide winner
+        totsum[k] = val[0][1] + val[1][1] + val[2][1]
 
-        if v[0][0] == v[1][0] == v[2][0]:
-            color[k] = v
+        if val[0][0] == val[1][0] == val[2][0]:
+            color[k] = val
 
-        if v[0][1] == v[1][1] == v[2][1]:
-            triple[k] = v
+        if val[0][1] == val[1][1] == val[2][1]:
+            triple[k] = val
 
-        if v[0][1] == v[1][1]-1 and v[1][1] == v[2][1]-1:
-            sequence[k] = v
+        if val[0][1] == val[1][1]-1 and val[1][1] == val[2][1]-1:
+            sequence[k] = val
 
 
     if triple:
