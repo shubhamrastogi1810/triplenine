@@ -22,7 +22,8 @@ def deal(d,n):
     p = {}
     for i in range(1, 4) :
         for j in range(1, n+1):
-            # p is a dict{playernum:[card1, card2, card3]}
+
+            # p is a dict {playernum:[card1, card2, card3]}
             nextnum = random.randint(0, len(d)-1)
             nextcard = d[nextnum]
             del d[nextnum]
@@ -31,6 +32,16 @@ def deal(d,n):
             else:
                 p[j].append(nextcard)
     return p
+
+def findmax(s):
+    tot = {}
+    for key, val in s.items():
+        tot[key] = val[0][1] + val[1][1] + val[2][1]
+
+    tot = {k: v for k, v in sorted(tot.items(), key=lambda item: item[1])}
+
+    return list(tot)[-1]
+    
 
 def select_winner(p):
     totsum = {}
@@ -58,27 +69,22 @@ def select_winner(p):
         if len(triple)==1:
             return next(iter(triple))
         else:
-            triple = {k: v for k, v in sorted(triple.items(), key=lambda item: item[1])}
-            print("More than one triples")
-            return list(triple)[-1]
+            #More than one triples
+            return findmax(triple)
 
     if sequence:
         if len(sequence)==1:
             return next(iter(sequence))
         else:
-            #ToDo: find sum of cards in each sequence
-            sequence = {k: v for k, v in sorted(sequence.items(), key=lambda item: item[1])}
-            print("More than one sequences")
-            return list(sequence)[-1]
+            #More than one sequences
+            return findmax(sequence)
 
     if color:
         if len(color)==1:
             return next(iter(color))
         else:
-            #ToDo: find sum of cards in each color
-            color = {k: v for k, v in sorted(color.items(), key=lambda item: item[1])}
-            print('More than one colors')
-            return list(color)[-1]
+            #More than one colors
+            return findmax(color)
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
