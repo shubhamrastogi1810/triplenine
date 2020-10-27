@@ -3,12 +3,8 @@ import random
 def main():
     
     deck = init_deck()
-#    print(deck)
-
     play = deal(deck,10)
-    for i in play:
-        print(i,play[i])
-#    winner = select_winner(play)
+    winner = select_winner(play)
 
 
 def init_deck():
@@ -25,7 +21,7 @@ def deal(d,n):
     for i in range(1, 4) :
         for j in range(1, n+1):
             # p is a dict{playernum:[card1, card2, card3]}
-            nextnum = random.randint(0, len(d))
+            nextnum = random.randint(0, len(d)-1)
             nextcard = d[nextnum]
             del d[nextnum]
             if j not in p:
@@ -33,6 +29,22 @@ def deal(d,n):
             else:
                 p[j].append(nextcard)
     return p
+
+def select_winner(p):
+    for k,v in p.items():
+        v.sort(key = lambda x:x[1])
+        print (k,v)
+        
+        if v[0][0] == v[1][0] == v[2][0]:
+            print('Color:',k)
+
+        if v[0][1] == v[1][1] == v[2][1]:
+            print('Triple:',k)
+
+        if v[0][1] == v[1][1]-1 and v[1][1] == v[2][1]-1:
+            print('Series:', k)
+    
+    return -999
 
 if __name__=='__main__':
     main()
