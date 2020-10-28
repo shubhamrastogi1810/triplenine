@@ -70,6 +70,7 @@ def select_winner(play):
     color = {}
     sequence = {}
     coloredsequence = {}
+    double = {}
     triple = {}
 
     for k,val in play.items():
@@ -84,6 +85,9 @@ def select_winner(play):
 
         if val[0][0] == val[1][0] == val[2][0]:
             triple[k] = val
+
+        if val[0][0] == val[1][0] or val[1][0] == val[2][0] or val[0][0] == val[2][0]:
+            double[k] = val
 
         if val[0][0] == val[1][0]-1 and val[1][0] == val[2][0]-1:
             sequence[k] = val
@@ -107,6 +111,10 @@ def select_winner(play):
     if color:
         print('Color')
         return findmax(color)
+    
+    if double:
+        print('Double')
+        return findmax(double)
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
