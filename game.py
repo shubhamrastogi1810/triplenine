@@ -72,7 +72,7 @@ def select_winner(play):
     triple = {}
 
     for k,val in play.items():
-        val.sort(key = lambda x:x[1]) # sort cards so its easy to find sequence
+        val.sort(key = lambda x:x[0]) # sort cards so its easy to find sequence
         print('{:2d} {}'.format(k, val))
 
         # sum total for each player if needed to decide winner
