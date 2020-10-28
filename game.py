@@ -59,7 +59,7 @@ def findmax(cards):
     for key, val in cards.items():
         tot[val[0][0] + val[1][0] + val[2][0]] = key
 
-    return list(tot.items())[-1][1]
+    return sorted(tot.items(), key=lambda x: x[0])[-1][1]
 
 
 def select_winner(play):
