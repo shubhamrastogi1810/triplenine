@@ -120,26 +120,16 @@ def select_winner(play):
     return list(totsum)[-1], "Sum"
 
 def print_play(play):
+    display = {
+        11: 'J',
+        12: 'Q',
+        13: 'K',
+        14: 'A',
+    }
+
     for k,v in play.items():
-        v0 = v[0][0]
-        if v[0][0] == 14: v0='A'
-        if v[0][0] == 13: v0='K'
-        if v[0][0] == 12: v0='Q'
-        if v[0][0] == 11: v0='J'
+        print('{:2d}. {:2s}{} {:2s}{} {:2s}{}'.format(k, display.get(v[0][0], str(v[0][0])), v[0][1], display.get(v[1][0], str(v[1][0])), v[1][1], display.get(v[2][0], str(v[2][0])),v[2][1]),end="\n\n")
 
-        v1 = v[1][0]
-        if v[1][0] == 14: v1='A'
-        if v[1][0] == 13: v1='K'
-        if v[1][0] == 12: v1='Q'
-        if v[1][0] == 11: v1='J'
-
-        v2 = v[2][0]
-        if v[2][0] == 14: v2='A'
-        if v[2][0] == 13: v2='K'
-        if v[2][0] == 12: v2='Q'
-        if v[2][0] == 11: v2='J'
-
-        print('{:2d}. {:}{} {:}{} {:}{}'.format(k,v0,v[0][1],v1,v[1][1],v2,v[2][1]),end="\n\n")
 
 def test():
 
