@@ -20,7 +20,7 @@ def main():
     play = deal(deck,10)
     print_play(play)
     winner, reason = select_winner(play)
-    print('Player {:2d} wins: {:s}.'.format(winner,reason))
+    print('Player {:<d} wins: {:s}.'.format(winner,reason))
 
 
 def init_deck():
