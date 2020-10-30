@@ -128,7 +128,7 @@ def print_play(play):
     }
 
     for k,v in play.items():
-        print('{:2d}. {:2s}{} {:2s}{} {:2s}{}'.\
+        print('{:2d}. {:>2s}{} {:>2s}{} {:>2s}{}'.\
         format(k, display.get(v[0][0], str(v[0][0])), v[0][1],\
                display.get(v[1][0], str(v[1][0])), v[1][1],\
                display.get(v[2][0], str(v[2][0])),v[2][1]),end="\n\n")
