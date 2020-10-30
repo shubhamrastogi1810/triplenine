@@ -58,6 +58,9 @@ def tiebreak(cards, reason):
     Find maximum of the card set.
     """
     #if reason=='double' and len(cards)>1:
+    #    for key, val in cards.items():
+    #        # figure out the double value
+    #        dval = val[0][0] if val[0][0] == val[1][0] else val[1][0]
             
     tot = {}
     for key, val in cards.items():
