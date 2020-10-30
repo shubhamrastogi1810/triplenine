@@ -53,15 +53,18 @@ def deal(deck,num):
                 play[j].append(nextcard)
     return play
 
-def findmax(cards):
+def tiebreak(cards, reason):
     """
     Find maximum of the card set.
     """
+    #if reason=='double' and len(cards)>1:
+            
     tot = {}
     for key, val in cards.items():
         tot[val[0][0] + val[1][0] + val[2][0]] = key
 
-    return sorted(tot.items(), key=lambda x: x[0])[-1][1]
+    #return sorted(tot.items(), key=lambda x: x[0])[-1][1]
+    return sorted(tot.items())[-1][1], reason
 
 
 def select_winner(play):
@@ -101,19 +104,19 @@ def select_winner(play):
 
 
     if triple:
-        return findmax(triple),"Triple"
+        return tiebreak(triple,"triple")
 
     if coloredsequence:
-        return findmax(coloredsequence), "Colored Sequence"
+        return tiebreak(coloredsequence, "colored sequence")
 
     if sequence:
-        return findmax(sequence), "Sequence"
+        return tiebreak(sequence, "sequence")
 
     if color:
-        return findmax(color), "Color"
+        return tiebreak(color, "colour")
 
     if double:
-        return findmax(double), "Double"
+        return tiebreak(double, "double")
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
