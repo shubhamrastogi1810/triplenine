@@ -121,7 +121,25 @@ def select_winner(play):
 
 def print_play(play):
     for k,v in play.items():
-        print('{:2d}. {:2d}{} {:2d}{} {:2d}{}'.format(k,v[0][0],v[0][1],v[1][0],v[1][1],v[2][0],v[2][1]),end="\n\n")
+        v0 = v[0][0]
+        if v[0][0] == 14: v0='A'
+        if v[0][0] == 13: v0='K'
+        if v[0][0] == 12: v0='Q'
+        if v[0][0] == 11: v0='J'
+
+        v1 = v[1][0]
+        if v[1][0] == 14: v1='A'
+        if v[1][0] == 13: v1='K'
+        if v[1][0] == 12: v1='Q'
+        if v[1][0] == 11: v1='J'
+
+        v2 = v[2][0]
+        if v[2][0] == 14: v2='A'
+        if v[2][0] == 13: v2='K'
+        if v[2][0] == 12: v2='Q'
+        if v[2][0] == 11: v2='J'
+
+        print('{:2d}. {:}{} {:}{} {:}{}'.format(k,v0,v[0][1],v1,v[1][1],v2,v[2][1]),end="\n\n")
 
 def test():
 
