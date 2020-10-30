@@ -19,8 +19,8 @@ def main():
     deck = init_deck()
     play = deal(deck,10)
     print_play(play)
-    winner = select_winner(play)
-    print('Winner is {:2d}'.format(winner))
+    winner, reason = select_winner(play)
+    print('Player {:2d} wins: {:s}.'.format(winner,reason))
 
 
 def init_deck():
@@ -101,29 +101,23 @@ def select_winner(play):
 
 
     if triple:
-        print('Triple')
-        return findmax(triple)
+        return findmax(triple),"Triple"
 
     if coloredsequence:
-        print('Colored Sequence')
-        return findmax(coloredsequence)
+        return findmax(coloredsequence), "Colored Sequence"
 
     if sequence:
-        print('Sequence')
-        return findmax(sequence)
+        return findmax(sequence), "Sequence"
 
     if color:
-        print('Color')
-        return findmax(color)
+        return findmax(color), "Color"
 
     if double:
-        print('Double')
-        return findmax(double)
+        return findmax(double), "Double"
 
     # Sort the totsum and return the last value (which is highest)
     totsum = {k: v for k, v in sorted(totsum.items(), key=lambda item: item[1])}
-    print('Sum')
-    return list(totsum)[-1]
+    return list(totsum)[-1], "Sum"
 
 def print_play(play):
     for k,v in play.items():
