@@ -57,11 +57,15 @@ def tiebreak(cards, reason):
     """
     Find maximum of the card set.
     """
-    #if reason=='double' and len(cards)>1:
-    #    for key, val in cards.items():
-    #        # figure out the double value
-    #        dval = val[0][0] if val[0][0] == val[1][0] else val[1][0]
-            
+    doubledict={}
+    if reason=='double' and len(cards)>1:
+        for key, val in cards.items():
+            # figure out the double value
+            dval = val[0][0] if val[0][0] == val[1][0] else val[1][0]
+            doubledict[dval]=key
+        
+        return sorted(doubledict.items())[-1][1], reason
+
     tot = {}
     for key, val in cards.items():
         tot[val[0][0] + val[1][0] + val[2][0]] = key
@@ -101,8 +105,10 @@ def select_winner(play):
              or sorted([val[0][0],val[1][0],val[2][0]])==[2,3,14]:
             sequence[k] = val
 
-        if (val[0][0] == val[1][0]-1 and val[1][0] == val[2][0]-1)\
+        if ((val[0][0] == val[1][0]-1 and val[1][0] == val[2][0]-1) \
+            or (sorted([val[0][0],val[1][0],val[2][0]])==[2,3,14])) \
             and val[0][1] == val[1][1] == val[2][1]:
+
             coloredsequence[k] = val
 
 
