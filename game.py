@@ -160,6 +160,7 @@ def select_winner(play):
     for k,val in play.items():
         if val[2][0] == maxfirst:
             maxdict[k] = val
+
     # if there are more players holding the max card
     if len(maxdict)>1:
         maxsecond=0
