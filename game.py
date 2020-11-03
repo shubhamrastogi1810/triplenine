@@ -100,25 +100,15 @@ def select_winner(play):
     """
     Select the winner.
     """
-    maxdict = {}
-    maxdict2 = {}
-
     color = {}
     sequence = {}
     coloredsequence = {}
     double = {}
     triple = {}
-    maxfirst = 0
-    maxkey = 0
 
     for k,val in play.items():
         val.sort(key = lambda x:x[0]) # sort cards so its easy to find sequence
         #print('{:2d} {}'.format(k, val))
-
-        # max card if needed to decide winner
-        if val[2][0] >= maxfirst:
-            maxfirst = val[2][0]
-            maxkey = k
 
         if val[0][1] == val[1][1] == val[2][1]:
             color[k] = val
@@ -155,33 +145,8 @@ def select_winner(play):
     if double:
         return tiebreak(double, "double")
     
-
-    # check if there are more players holding the max card
-    for k,val in play.items():
-        if val[2][0] == maxfirst:
-            maxdict[k] = val
-
-    # if there are more players holding the max card
-    if len(maxdict)>1:
-        maxsecond=0
-        maxkey=0
-        for k,val in maxdict.items():
-            if val[1][0] >= maxsecond:
-                maxsecond = val[1][0]
-                maxkey = k
-
-        for k, val in maxdict.items():
-            if val[1][0] == maxsecond:
-                maxdict2[k] = val
-    
-    if len(maxdict2)>1:
-        maxthird=0
-        maxkey=0
-        for k,val in maxdict2.items():
-            if val[0][0] >= maxthird:
-                maxthird = val[0][0]
-                maxkey = k
-
+    max_sorted = sorted(play.items(), key=lambda x: (x[1][2], x[1][1], x[1][0]), reverse=True)
+    maxkey = max_sorted[0][0]
 
     return maxkey, "max"
 
